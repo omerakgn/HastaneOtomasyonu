@@ -1,0 +1,63 @@
+﻿.hakkimizda {
+    float: left;   
+    width: 25%;
+    height: 450px;
+    margin-right: 40px;
+   
+    
+}
+.duyuru {
+    float: left;
+    width: 55%;
+    height: 450px;
+    
+}
+.kirmizi {
+    float: right;
+    width: 150px;
+    height: 450px;
+    margin-left: 40px;
+    
+}
+.container {
+    display: flex;
+    margin-left: 90px;
+    width: 1200px;
+    height: 500px;
+}
+.circleclass {
+    background-color: lightblue;
+    border-radius: 50%;
+    border: 10px solid rgba(255, 255, 255, .5);
+    width: 125px;
+    height: 125px;
+    line-height: 125px;
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 4px;
+    text-align: center;
+    align-items: center;
+}
+.button{
+    background-color: lightblue;
+    border-radius:2%;
+    border:solid black 2px;
+    height:30px;
+
+}
+.lineup {
+    
+    float: left;
+   
+}
+
+.tablestyle {
+    width: 400px;
+    height: 100px;
+    margin-left: 300px;
+}
+
+.tdstyle {
+    height: 23px;
+}
