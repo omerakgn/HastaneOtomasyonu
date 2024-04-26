@@ -77,12 +77,12 @@ public partial class Randevual : System.Web.UI.Page
     public void GetHastaneDropDownData(int secilendeger){ 
        
 
-        SqlCommand commandListIlce = new SqlCommand("Select * from Hastane", SqlConnectionClass.connection);
+        SqlCommand command = new SqlCommand("Select * from Hastane", SqlConnectionClass.connection);
         SqlConnectionClass.CheckConnection();
-        commandListIlce.Parameters.AddWithValue("@IlceID", secilendeger);
+        command.Parameters.AddWithValue("@IlceID", secilendeger);
 
         hastane.Items.Clear();
-        SqlDataReader dr = commandListIlce.ExecuteReader();
+        SqlDataReader dr = command.ExecuteReader();
         while (dr.Read()) {
             ListItem item = new ListItem();
             item.Text = dr["Hastaneisim"].ToString();
@@ -101,12 +101,12 @@ public partial class Randevual : System.Web.UI.Page
     {
      
 
-        SqlCommand commandListIlce = new SqlCommand("Select * from Poliklinik", SqlConnectionClass.connection);
+        SqlCommand command = new SqlCommand("Select * from Poliklinik", SqlConnectionClass.connection);
         SqlConnectionClass.CheckConnection();
-        commandListIlce.Parameters.AddWithValue("@HastaneID", secilendeger);
+        command.Parameters.AddWithValue("@HastaneID", secilendeger);
 
         poliklinik.Items.Clear();
-        SqlDataReader dr = commandListIlce.ExecuteReader();
+        SqlDataReader dr = command.ExecuteReader();
 
         while (dr.Read())
         {
@@ -128,11 +128,11 @@ public partial class Randevual : System.Web.UI.Page
     {
        
        
-            SqlCommand commandListIlce = new SqlCommand("Select * from Doktor", SqlConnectionClass.connection);
+            SqlCommand command = new SqlCommand("Select * from Doktor", SqlConnectionClass.connection);
             SqlConnectionClass.CheckConnection();
-            commandListIlce.Parameters.AddWithValue("@PolID", secilendeger);
+            command.Parameters.AddWithValue("@PolID", secilendeger);
             doktor.Items.Clear();
-            SqlDataReader dr = commandListIlce.ExecuteReader();
+            SqlDataReader dr = command.ExecuteReader();
             
         try
         {

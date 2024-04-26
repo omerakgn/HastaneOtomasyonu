@@ -83,7 +83,7 @@ public partial class Randevularim : System.Web.UI.Page
                 htmlTable.Append("<td>" + randevu.Hastaneisim + "</td>");
                 htmlTable.Append("<td>" + randevu.Polisim + "</td>");
                 htmlTable.Append("<td>" + randevu.Doktor + "</td>");
-                htmlTable.Append("<td><input type='button' ID='button' value='İptal Et' onclick='DeleteButton_Click ' style='width:60px;' /></td>");
+                htmlTable.Append("<td><input type='button' ID='button' value='İptal Et' OnClick='DeleteButton_Click ' style='width:60px;' /></td>");
                 htmlTable.Append("</tr>");
                
                 
@@ -106,8 +106,8 @@ public partial class Randevularim : System.Web.UI.Page
     protected void DeleteButton_Click(object sender, EventArgs e)
     {
         
+        Response.Write("<script>alert('" + "silindi" + "')</script>");
 
-      
 
         // Satırı silmek için gerekli işlemleri gerçekleştirin
         // Örneğin, listeden ilgili satırı kaldırabilir ve yeniden render edebilirsiniz.

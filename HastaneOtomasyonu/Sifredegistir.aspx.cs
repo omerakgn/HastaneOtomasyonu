@@ -28,9 +28,9 @@ public partial class Sifredegistir : System.Web.UI.Page
 
     public void send_click()
     {
-        Session["tcno"] = tcno.Text; 
+        Session["tcnosifredegistir"] = tcno.Text; 
         Session["mail"] = mail.Text;
-        String TC = Session["tcno"]?.ToString();
+        String TC = Session["tcnosifredegistir"]?.ToString();
 
 
         Random r = new Random(); 

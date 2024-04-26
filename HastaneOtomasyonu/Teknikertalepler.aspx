@@ -9,7 +9,8 @@
 <body>
     <form id="form1" runat="server">
         <div>
-          <b>TALEPLER</b>  </div>
+          <div style="margin-left:400px; " ><asp:Literal ID="litHtmlTable2" runat="server" ></asp:Literal></div>
+            </div>
     </form>
 </body>
 </html>
