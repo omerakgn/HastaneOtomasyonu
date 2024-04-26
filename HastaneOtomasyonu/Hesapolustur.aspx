@@ -31,16 +31,16 @@
 
                 <tr>
                     <td class="auto-style11">
-                        <asp:Label ID="Label1" runat="server" Text="İsim :" Font-Bold="True" Width="50px"></asp:Label></td>
+                        <asp:Label ID="Label1" runat="server" Text="İsim soyisim :" Font-Bold="True" Width="92px"></asp:Label></td>
                     <td class="auto-style11">
                         <asp:TextBox ID="isimtxt" runat="server" Width="190px"></asp:TextBox></td>
                 </tr>
 
                 <tr>
                     <td class="auto-style11">
-                        <asp:Label ID="Label2" runat="server" Text="Soyisim :" Font-Bold="True"></asp:Label></td>
+                        <asp:Label ID="Label2" runat="server" Text="Adres :" Font-Bold="True"></asp:Label></td>
                     <td class="auto-style11">
-                        <asp:TextBox ID="soyisimtxt" runat="server" Width="190px"></asp:TextBox></td>
+                        <asp:TextBox ID="adrestxt" runat="server" Width="190px"></asp:TextBox></td>
                 </tr>
 
                 <tr>
