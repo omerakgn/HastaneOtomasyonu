@@ -38,8 +38,8 @@ public partial class Doktorgiris : System.Web.UI.Page
             Session["Tcno2"] = Tcno1.Text;
             Session["Sifre1"] = Sifre1.Text;
 
-            String tcno = Session["Tcno2"]?.ToString();
-            String sifre = Session["Sifre1"]?.ToString();
+            String tcno = Session["Tcno2"].ToString();
+            String sifre = Session["Sifre1"].ToString();
 
             if (tcno == doktor.DoktorTC && sifre == doktor.Doktorsifre)
             {
@@ -68,8 +68,8 @@ public partial class Doktorgiris : System.Web.UI.Page
     {
         Session["Tcno2"] = Tcno1.Text;
         Session["Sifre1"] = Sifre1.Text;
-        String tcno = Session["Tcno2"]?.ToString();
-        String sifre = Session["Sifre1"]?.ToString();
+        String tcno = Session["Tcno2"].ToString();
+        String sifre = Session["Sifre1"].ToString();
         if (tcno == "" || sifre == "") 
         {
             Response.Write("<script>alert('" + "Lütfen Eksik bilgi bırakmayınız ! " + "')</script>");

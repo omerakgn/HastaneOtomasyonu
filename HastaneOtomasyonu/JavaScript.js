@@ -1,4 +1,4 @@
-﻿function onayButtonClick(buttonID) {
+﻿function OnnayButtonClick(buttonID) {
     // Buton ID'sinden hangi satıra tıklandığını al
     var rowID = buttonID.replace("onaybutton_", "");
 

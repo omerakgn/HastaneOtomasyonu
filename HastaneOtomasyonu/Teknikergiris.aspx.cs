@@ -38,8 +38,8 @@ public partial class Teknikergiris : System.Web.UI.Page
             Tekniker tekniker = teknikerListesi[i];
             Session["Tcno"] = Tcno.Text;
             Session["Sifre"] = Sifre.Text;
-            String tcno = Session["Tcno"]?.ToString();
-            String sifre = Session["Sifre"]?.ToString();
+            String tcno = Session["Tcno"].ToString();
+            String sifre = Session["Sifre"].ToString();
 
             if (tcno == tekniker.TeknikerTC && sifre == tekniker.Teknikersifre)
             {

@@ -39,8 +39,8 @@ public partial class Hastagiris : System.Web.UI.Page
             Session["Tcno"] = Tcno.Text;
             Session["Sifre"] = Sifre.Text;
             
-            String tcno = Session["Tcno"]?.ToString();
-            String sifre = Session["Sifre"]?.ToString();
+            String tcno = Session["Tcno"].ToString();
+            String sifre = Session["Sifre"].ToString();
 
             if (tcno==hasta.HastaTC && sifre == hasta.Hastasifre)
             {
@@ -67,8 +67,8 @@ public partial class Hastagiris : System.Web.UI.Page
     {
         Session["Tcno"] = Tcno.Text;
         Session["Sifre"] = Sifre.Text;
-        String tcno = Session["Tcno"]?.ToString();
-        String sifre = Session["Sifre"]?.ToString();
+        String tcno = Session["Tcno"].ToString();
+        String sifre = Session["Sifre"].ToString();
         if (tcno == "" || sifre == "")
         {
             alert("Lütfen istenilen bilgileri doldurunuz.");

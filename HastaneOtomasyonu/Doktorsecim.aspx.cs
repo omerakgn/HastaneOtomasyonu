@@ -43,7 +43,7 @@ public partial class Doktorsecim : System.Web.UI.Page
         while (dr.Read())
         {
            
-            string DoktorTC = dr["DoktorTC"]?.ToString();
+            string DoktorTC = dr["DoktorTC"].ToString();
 
            
             if (doktortc == DoktorTC && DoktorTC != null)

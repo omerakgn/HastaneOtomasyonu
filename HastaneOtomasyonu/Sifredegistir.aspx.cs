@@ -30,14 +30,14 @@ public partial class Sifredegistir : System.Web.UI.Page
     {
         Session["tcnosifredegistir"] = tcno.Text; 
         Session["mail"] = mail.Text;
-        String TC = Session["tcnosifredegistir"]?.ToString();
+        String TC = Session["tcnosifredegistir"].ToString();
 
 
         Random r = new Random(); 
         int num = r.Next(1000, 9999);
         Session["kod"]  =num; 
 
-        string to = Session["mail"]?.ToString(); 
+        string to = Session["mail"].ToString(); 
         string from = "hastanerandevu00@gmail.com"; 
 
         //hastanerandevu00@gmail.com   şifre: hastanerandevu159357

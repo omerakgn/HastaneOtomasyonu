@@ -25,12 +25,12 @@ public partial class Hesapolustur : System.Web.UI.Page
         Session["sifre"] = sifretxt.Text;
         Session["telno"] = telnotxt.Text;
        
-        String isim = Session["isim"]?.ToString();
-        String adres = Session["adres"]?.ToString();
-        String Tcno = Session["tcno"]?.ToString();
-        String mail = Session["mail"]?.ToString();
-        String sifre = Session["sifre"]?.ToString();
-        String telno = Session["telno"]?.ToString();
+        String isim = Session["isim"].ToString();
+        String adres = Session["adres"].ToString();
+        String Tcno = Session["tcno"].ToString();
+        String mail = Session["mail"].ToString();
+        String sifre = Session["sifre"].ToString();
+        String telno = Session["telno"].ToString();
         if(isim =="" || adres =="" || Tcno == "" || mail=="" ||sifre=="" || telno == "")
         {
             alert("Lütfen bütün alanları doldurunuz !");

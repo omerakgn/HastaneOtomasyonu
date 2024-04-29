@@ -47,7 +47,7 @@ public partial class Randevularim : System.Web.UI.Page
 
         while (dr.Read())
         {
-            string HastaTC = dr["HastaTC"]?.ToString();
+            string HastaTC = dr["HastaTC"].ToString();
             rowCount++;
 
             if (hastaTC == HastaTC && HastaTC != null)
