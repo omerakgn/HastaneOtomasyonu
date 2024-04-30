@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -27,92 +28,40 @@ public partial class Randevularim : System.Web.UI.Page
     public void Datareader()
     {
 
-        string sqlQuery = @"SELECT R.Randevutarih, H.Hastaneisim, P.Polisim, D.Doktor, Ha.HastaTC
+        string sqlQuery = @"SELECT R.Randevutarih, H.Hastaneisim, P.Polisim, D.Doktor, Ha.HastaTC, R.RandevuID
                         FROM Randevu AS R
                         INNER JOIN Hastane AS H ON R.HastaneID = H.HastaneID
                         INNER JOIN Poliklinik AS P ON R.PolID = P.PolID
                         INNER JOIN Doktor AS D ON R.DoktorTC = D.DoktorTC
                         INNER JOIN Hasta AS Ha ON R.HastaTC = Ha.HastaTC";
 
-        SqlCommand commandListIl = new SqlCommand(sqlQuery, SqlConnectionClass.connection);
+        SqlDataAdapter command = new SqlDataAdapter(sqlQuery, SqlConnectionClass.connection);
         SqlConnectionClass.CheckConnection();
-        SqlDataReader dr = commandListIl.ExecuteReader();
-        List<Randevular> randevularim = new List<Randevular>();
-        StringBuilder htmlTable = new StringBuilder();
 
-        string hastaTC = Session["Tcno"].ToString();
-        bool hasRecord = false;
+        DataTable dtbl = new DataTable();
+        int i = 0;
 
-        int rowCount = 0;
+        command.Fill(dtbl);
 
-        while (dr.Read())
+        if (dtbl.Rows.Count > 0)
         {
-            string HastaTC = dr["HastaTC"].ToString();
-            rowCount++;
-
-            if (hastaTC == HastaTC && HastaTC != null)
-            {
-                hasRecord = true;
-
-                DateTime tarih = Convert.ToDateTime(dr["Randevutarih"]);
-                string date = tarih.Date.ToString("dd-MM-yyyy");
-
-                
-
-
-                Randevular randevu = new Randevular();
-                randevu.Randevutarih = date;
-                randevu.Hastaneisim = dr["Hastaneisim"].ToString();
-                randevu.Polisim = dr["Polisim"].ToString();
-                randevu.Doktor = dr["Doktor"].ToString();
-
-                randevularim.Add(randevu);
-
-                Button deleteButton = new Button();
-                deleteButton.ID = "btnDelete_" + rowCount; // Butonun kimliğini belirtin
-                deleteButton.Text = "Sil"; // Buton metnini belirtin
-                deleteButton.Click += new EventHandler(DeleteButton_Click); // Butona tıklanınca çağrılacak işlevi belirtin
-
-                TableRow row = new TableRow();
-
-                TableCell buttonCell = new TableCell();
-                buttonCell.Controls.Add(deleteButton);
-                
-                htmlTable.Append("<tr>");
-                htmlTable.Append("<td>" + randevu.Randevutarih + "</td>");
-                htmlTable.Append("<td>" + randevu.Hastaneisim + "</td>");
-                htmlTable.Append("<td>" + randevu.Polisim + "</td>");
-                htmlTable.Append("<td>" + randevu.Doktor + "</td>");
-                htmlTable.Append("<td><input type='button' ID='button' value='İptal Et' OnClick='DeleteButton_Click ' style='width:60px;' /></td>");
-                htmlTable.Append("</tr>");
-               
-                
-            }
-        }
-
-        if (hasRecord)
-        {
-            htmlTable.Insert(0, "<table border='1'><tr><th>Randevu Tarih</th><th>Hastane İsim</th><th>Poliklinik İsim</th><th>Doktor İsim</th><th> </th></tr>");
-            htmlTable.Append("</table>");
-            litHtmlTable.Text = htmlTable.ToString();
+            GwRandevu.DataSource = dtbl;
+            GwRandevu.DataBind();
         }
         else
         {
-            Literal1.Text = "<b>RANDEVUNUZ BULUNMAMAKTADIR.RANDEVU ALMAK İÇİN ÜSTTE BULUNAN <u>RANDEVU AL</u> BUTONUNA TIKLAYINIZ. </b>";
+            dtbl.Rows.Add(dtbl.NewRow());
+            GwRandevu.DataSource = dtbl;
+            GwRandevu.DataBind();
+            GwRandevu.Rows[0].Cells.Clear();
+            GwRandevu.Rows[0].Cells.Add(new TableCell());
+            GwRandevu.Rows[0].Cells[0].ColumnSpan = dtbl.Columns.Count;
+            GwRandevu.Rows[0].Cells[0].Text = "Veri bulunamadı";
+            GwRandevu.Rows[0].Cells[0].HorizontalAlign = HorizontalAlign.Center;
         }
 
-
     }
-    protected void DeleteButton_Click(object sender, EventArgs e)
-    {
-        
-        Response.Write("<script>alert('" + "silindi" + "')</script>");
-
-
-        // Satırı silmek için gerekli işlemleri gerçekleştirin
-        // Örneğin, listeden ilgili satırı kaldırabilir ve yeniden render edebilirsiniz.
-        // Veya bir veritabanı işlemi yapabilirsiniz.
-    }
+    
 
 
 
@@ -128,5 +77,23 @@ public partial class Randevularim : System.Web.UI.Page
         string hastaTC = Session["Tcno"].ToString();
 
         Response.Redirect("Randevual.aspx");
+    }
+
+    protected void GwRandevu_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        string queryupdate = "UPDATE Randevu" +
+            " SET Randevutarih = NULL ," +
+            " HastaTC = NULL ," +
+            " DoktorTC = NULL ,"+
+            " PolID = NULL ,"+
+            " HastaneID = NULL "+
+            " WHERE RandevuID = @ID;";
+        
+        SqlCommand command = new SqlCommand(queryupdate, SqlConnectionClass.connection);
+        SqlConnectionClass.CheckConnection();
+        command.Parameters.AddWithValue("@ID", Convert.ToInt32(GwRandevu.DataKeys[e.RowIndex].Value.ToString()));
+        command.ExecuteNonQuery();
+
+        Datareader();
     }
 }

@@ -25,10 +25,45 @@
        <div style="margin-top:50px; margin-left:600px">
            <asp:Button ID="Button2" runat="server" Text="Yeni Randevu Al " style="width:100px; height:35px;" Font-Bold="True" Font-Italic="False" Font-Names="Calibri" Font-Size="Small" BackColor="LightBlue" OnClick="Button2_Click" />
             </div>
-            <div >
-                <div style="margin-left:400px; " ><asp:Literal ID="litHtmlTable" runat="server" ></asp:Literal></div>
-                
-                <div style="margin-left:200px; " ><asp:Literal ID="Literal1" runat="server" ></asp:Literal></div>
+            <div style ="margin-left:350px; margin-top:30px;">
+               <asp:Gridview ID="GwRandevu" runat="server" AutoGenerateColumns="False" DataKeyNames="RandevuID" OnRowDeleting="GwRandevu_RowDeleting">
+                   <Columns>
+                       <asp:TemplateField HeaderText="Randevu tarihi">
+                           <ItemTemplate>
+                               <asp:Label Text='<%#  Eval("Randevutarih") %>'  runat="server"> </asp:Label>
+
+                           </ItemTemplate>
+                       </asp:TemplateField>
+                       <asp:TemplateField HeaderText="Hastane">
+                           <ItemTemplate>
+                               <asp:Label Text='<%#  Eval("Hastaneisim") %>' runat="server"> </asp:Label>
+
+                           </ItemTemplate>
+                       </asp:TemplateField>
+                      
+                       <asp:TemplateField HeaderText="Poliklinik">
+                           <ItemTemplate>
+                               <asp:Label Text='<%#  Eval("Polisim") %>' runat="server"> </asp:Label>
+                           </ItemTemplate>
+                       </asp:TemplateField>
+
+                       <asp:TemplateField HeaderText="Doktor">
+                           <ItemTemplate>
+                               <asp:Label Text='<%#  Eval("Doktor") %>' runat="server"> </asp:Label>
+
+                           </ItemTemplate>
+                       </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="">
+                            <ItemTemplate>
+                                <asp:Button  Text="Randevuyu iptal et" runat="server" CommandName="Delete" ToolTip="iptal" > </asp:Button>
+
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                       
+                   </Columns>
+
+               </asp:Gridview>
 
             </div>
                     
