@@ -27,29 +27,35 @@ public partial class Randevularim : System.Web.UI.Page
 
     public void Datareader()
     {
+        string hastatc = Session["Tcno"].ToString();
 
         string sqlQuery = @"SELECT R.Randevutarih, H.Hastaneisim, P.Polisim, D.Doktor, Ha.HastaTC, R.RandevuID
                         FROM Randevu AS R
                         INNER JOIN Hastane AS H ON R.HastaneID = H.HastaneID
                         INNER JOIN Poliklinik AS P ON R.PolID = P.PolID
                         INNER JOIN Doktor AS D ON R.DoktorTC = D.DoktorTC
-                        INNER JOIN Hasta AS Ha ON R.HastaTC = Ha.HastaTC";
+                        INNER JOIN Hasta AS Ha ON R.HastaTC = Ha.HastaTC
+                        WHERE R.HastaTC = @hastatc ";
 
-        SqlDataAdapter command = new SqlDataAdapter(sqlQuery, SqlConnectionClass.connection);
+
+        SqlCommand command = new SqlCommand(sqlQuery, SqlConnectionClass.connection);
         SqlConnectionClass.CheckConnection();
 
-        DataTable dtbl = new DataTable();
+        command.Parameters.AddWithValue("@hastatc", hastatc);
+
+        
         int i = 0;
+        SqlDataReader reader = command.ExecuteReader();
+        
 
-        command.Fill(dtbl);
-
-        if (dtbl.Rows.Count > 0)
+        if (reader.HasRows)
         {
-            GwRandevu.DataSource = dtbl;
+            GwRandevu.DataSource = reader;
             GwRandevu.DataBind();
         }
         else
         {
+            DataTable dtbl = new DataTable();
             dtbl.Rows.Add(dtbl.NewRow());
             GwRandevu.DataSource = dtbl;
             GwRandevu.DataBind();

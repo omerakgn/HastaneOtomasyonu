@@ -105,12 +105,23 @@ public partial class Teknikertalepler : System.Web.UI.Page
             string teknikSorun = lblTeknikSorun.Text;
             int teknikSorunID = GetTeknikSorunIDFromDatabase(teknikSorun);
 
-            if (teknikSorunID != -1)
+            
+            Label labeldoktor = GridView1.Rows[rowIndex].FindControl("labeldoktor") as Label;
+            string Doktor = labeldoktor.Text;
+            string DoktorTC = GetDoktordata(Doktor);
+
+            
+            
+           
+            
+            if (teknikSorunID != -1 )
             {
-                string sqlQuery = "INSERT INTO Teknikergorevler (TeknikSorunID) VALUES(@TeknikSorunID)";
+                string sqlQuery = "INSERT INTO Teknikergorevler (TeknikSorunID, DoktorTC, Tekniksorun) VALUES(@TeknikSorunID, @DoktorTC , @Tekniksorun)";
                 SqlCommand command = new SqlCommand(sqlQuery, SqlConnectionClass.connection);
                 SqlConnectionClass.CheckConnection();
                 command.Parameters.AddWithValue("@TeknikSorunID", teknikSorunID);
+                command.Parameters.AddWithValue("@DoktorTC", DoktorTC);
+                command.Parameters.AddWithValue("@Tekniksorun", teknikSorun);
                 command.ExecuteNonQuery();
                
                 Deletedatafromtable(teknikSorunID);
@@ -120,14 +131,15 @@ public partial class Teknikertalepler : System.Web.UI.Page
     }
     public int GetTeknikSorunIDFromDatabase(string teknikSorun)
     {
-        int teknikSorunID = -1; // Default value if the ID is not found
-        string sqlQuery = "SELECT TeknikSorunID FROM Teknik_Sorun WHERE Tekniksorun = @Tekniksorun";
+        int teknikSorunID = -1; 
+        string sqlQuery = "SELECT TeknikSorunID FROM Teknik_Sorun WHERE Tekniksorun = @Tekniksorun  ";
+           
        
             using (SqlCommand command = new SqlCommand(sqlQuery, SqlConnectionClass.connection))
             {
                 command.Parameters.AddWithValue("@Tekniksorun", teknikSorun);
                
-                using (SqlDataReader reader = command.ExecuteReader())
+            using (SqlDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
                     {
@@ -137,6 +149,29 @@ public partial class Teknikertalepler : System.Web.UI.Page
             }
         
         return teknikSorunID;
+    }
+    public string GetDoktordata(string Doktor)
+    {
+        string DoktorTC = ""; 
+        string sqlQuery = "SELECT DoktorTC FROM Doktor WHERE Doktor = @Doktor  ";
+
+
+        using (SqlCommand command = new SqlCommand(sqlQuery, SqlConnectionClass.connection))
+        {
+            command.Parameters.AddWithValue("@Doktor", Doktor);
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    DoktorTC = reader.GetString(0);
+                }
+            }
+        }
+
+
+        return DoktorTC;
+
     }
     public void Deletedatafromtable(int teknikSorunID)
     {

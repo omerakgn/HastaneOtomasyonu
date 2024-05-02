@@ -29,7 +29,7 @@
               <Columns>
                   <asp:TemplateField HeaderText="Doktor">
                       <ItemTemplate>
-                          <asp:Label Text='<%#  Eval("Doktor") %>' runat="server"> </asp:Label>
+                          <asp:Label ID="labeldoktor" Text='<%#  Eval("Doktor") %>' runat="server"> </asp:Label>
                       </ItemTemplate>
 
 

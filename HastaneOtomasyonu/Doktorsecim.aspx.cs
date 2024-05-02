@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Data;
 
 public partial class Doktorsecim : System.Web.UI.Page
 {
@@ -17,76 +18,45 @@ public partial class Doktorsecim : System.Web.UI.Page
     }
     public void Datareader()
     {
-       
-        string sqlQuery = @"SELECT R.Randevutarih, H.Hastaneisim, P.Polisim, D.Doktor, Ha.HastaTC,D.DoktorTC
-                        FROM Randevu AS R
-                        INNER JOIN Hastane AS H ON R.HastaneID = H.HastaneID
-                        INNER JOIN Poliklinik AS P ON R.PolID = P.PolID
-                        INNER JOIN Doktor AS D ON R.DoktorTC = D.DoktorTC
-                        INNER JOIN Hasta AS Ha ON R.HastaTC = Ha.HastaTC";
-
-        SqlCommand commandListIl = new SqlCommand(sqlQuery, SqlConnectionClass.connection);
-        SqlConnectionClass.CheckConnection();
-        SqlDataReader dr = commandListIl.ExecuteReader();
-       
-       
-        List<Randevular> randevularim = new List<Randevular>();
-        StringBuilder htmlTable = new StringBuilder();
-       
-       
         string doktortc = Session["Tcno2"].ToString();
-      
-        
-        bool hasRecord = false;
+
+        string sqlQuery = @"SELECT R.Randevutarih, D.Doktor, Ha.HastaTC,D.DoktorTC, Ha.Hasta,R.RandevuID
+                        FROM Randevu AS R
+                        INNER JOIN Doktor AS D ON R.DoktorTC = D.DoktorTC
+                        INNER JOIN Hasta AS Ha ON R.HastaTC = Ha.HastaTC
+                        WHERE R.DoktorTC = @doktortc";
+
+        SqlCommand command = new SqlCommand(sqlQuery, SqlConnectionClass.connection);
+        SqlConnectionClass.CheckConnection();
+
+        command.Parameters.AddWithValue("@doktortc", doktortc);
+
+        SqlDataReader reader = command.ExecuteReader();
+
+        int i = 0;
 
        
-        while (dr.Read())
+
+        if (reader.HasRows)
         {
-           
-            string DoktorTC = dr["DoktorTC"].ToString();
-
-           
-            if (doktortc == DoktorTC && DoktorTC != null)
-            {
-                hasRecord = true; 
-
-               
-                DateTime tarih = Convert.ToDateTime(dr["Randevutarih"]);
-                string date = tarih.Date.ToString("dd-MM-yyyy"); 
-
-               
-                Randevular randevu = new Randevular();
-                randevu.Randevutarih = date;
-                randevu.Hastaneisim = dr["Hastaneisim"].ToString();
-                randevu.Polisim = dr["Polisim"].ToString();
-                randevu.Doktor = dr["Doktor"].ToString();
-
-                randevularim.Add(randevu); 
-
-              
-                htmlTable.Append("<tr>");
-                htmlTable.Append("<td>" + randevu.Randevutarih + "</td>");
-                htmlTable.Append("<td>" + randevu.Hastaneisim + "</td>");
-                htmlTable.Append("<td>" + randevu.Polisim + "</td>");
-                htmlTable.Append("<td>" + randevu.Doktor + "</td>");
-                htmlTable.Append("</tr>");
-            }
+            GwDoktor.DataSource = reader;
+            GwDoktor.DataBind();
         }
-
-        if (hasRecord) 
+        else
         {
-            
-            htmlTable.Insert(0, "<table border='1'><tr><th>Randevu Tarih</th><th>Hastane İsim</th><th>Poliklinik İsim</th><th>Doktor İsim</th></tr>");
-            htmlTable.Append("</table>");
-            litHtmlTable2.Text = htmlTable.ToString();
+            DataTable dtbl = new DataTable();
+            dtbl.Rows.Add(dtbl.NewRow());
+            GwDoktor.DataSource = dtbl;
+            GwDoktor.DataBind();
+            GwDoktor.Rows[0].Cells.Clear();
+            GwDoktor.Rows[0].Cells.Add(new TableCell());
+            GwDoktor.Rows[0].Cells[0].ColumnSpan = dtbl.Columns.Count;
+            GwDoktor.Rows[0].Cells[0].Text = "Veri bulunamadı";
+            GwDoktor.Rows[0].Cells[0].HorizontalAlign = HorizontalAlign.Center;
         }
-        else 
-        {
-            Literal2.Text = "<b> HERHANGİ BİR RANDEVUNUZ BULUNMAMAKTADIR. </b>";
-        }
-
 
     }
+    
 
 
     public class Randevular
@@ -95,5 +65,31 @@ public partial class Doktorsecim : System.Web.UI.Page
         public string Hastaneisim { get; set; }
         public string Polisim { get; set; }
         public string Doktor { get; set; }
+    }
+
+  
+
+    
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Receteolustur.aspx");
+    }
+
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Ameliyatkayit.aspx");
+    }
+
+    protected void Button4_Click(object sender, EventArgs e)
+    {
+        string doktorTC = Session["Tcno2"].ToString();
+        Response.Redirect("M_anketgor.aspx");
+    }
+
+    protected void Button5_Click(object sender, EventArgs e)
+    {
+        string doktorTC = Session["Tcno2"].ToString();
+
+        Response.Redirect("Sorunbildir.aspx");
     }
 }
