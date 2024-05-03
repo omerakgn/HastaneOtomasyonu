@@ -16,17 +16,25 @@ public partial class Sorunbildir : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        string DoktorTC = Session["Tcno2"].ToString();
 
-        string teknikSorun = Tekniksoruntxt.Text;
+        if(Tekniksoruntxt.Text != "")
+        {
+            string DoktorTC = Session["Tcno2"].ToString();
 
-        string sqlquery = "INSERT INTO Teknik_Sorun (DoktorTC, Tekniksorun) VALUES(@DoktorTC , @Tekniksorun)";
+            string teknikSorun = Tekniksoruntxt.Text;
 
-        SqlCommand command = new SqlCommand(sqlquery, SqlConnectionClass.connection);
-        SqlConnectionClass.CheckConnection();
-        command.Parameters.AddWithValue("@DoktorTC", DoktorTC);
-        command.Parameters.AddWithValue("@Tekniksorun", teknikSorun);
-        command.ExecuteNonQuery();
-        Tekniksoruntxt.Text = "";
+            string sqlquery = "INSERT INTO Teknik_Sorun (DoktorTC, Tekniksorun) VALUES(@DoktorTC , @Tekniksorun)";
+
+            SqlCommand command = new SqlCommand(sqlquery, SqlConnectionClass.connection);
+            SqlConnectionClass.CheckConnection();
+            command.Parameters.AddWithValue("@DoktorTC", DoktorTC);
+            command.Parameters.AddWithValue("@Tekniksorun", teknikSorun);
+            command.ExecuteNonQuery();
+            Tekniksoruntxt.Text = "";
+        }
+        else
+        {
+            Response.Write("<script>alert('" + "Lütfen teknik sorun kısmını boş bırakmayınız ! " + "')</script>");
+        }
     }
 }

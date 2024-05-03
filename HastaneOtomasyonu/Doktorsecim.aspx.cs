@@ -14,7 +14,11 @@ public partial class Doktorsecim : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Datareader();
+        if(!IsPostBack) 
+        {
+            Datareader();
+        }
+        
     }
     public void Datareader()
     {
@@ -72,11 +76,13 @@ public partial class Doktorsecim : System.Web.UI.Page
     
     protected void Button2_Click(object sender, EventArgs e)
     {
+        string doktorTC = Session["Tcno2"].ToString();
         Response.Redirect("Receteolustur.aspx");
     }
 
     protected void Button3_Click(object sender, EventArgs e)
     {
+        string doktorTC = Session["Tcno2"].ToString();
         Response.Redirect("Ameliyatkayit.aspx");
     }
 

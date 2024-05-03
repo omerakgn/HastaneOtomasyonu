@@ -71,13 +71,7 @@ public partial class Randevularim : System.Web.UI.Page
 
 
 
-    public class Randevular
-    {
-        public string Randevutarih { get; set; }
-        public string Hastaneisim { get; set; }
-        public string Polisim { get; set; }
-        public string Doktor { get; set; }
-    }
+   
     protected void Button2_Click(object sender, EventArgs e)
     {
         string hastaTC = Session["Tcno"].ToString();
