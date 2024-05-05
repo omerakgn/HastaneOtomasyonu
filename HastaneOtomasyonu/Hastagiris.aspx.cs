@@ -53,6 +53,8 @@ public partial class Hastagiris : System.Web.UI.Page
             }
             else
             {
+               
+
                 alert("Lütfen bilgilerinizi kontrol ediniz.");
             }
         }

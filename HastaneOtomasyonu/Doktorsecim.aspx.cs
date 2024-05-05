@@ -37,14 +37,16 @@ public partial class Doktorsecim : System.Web.UI.Page
 
         SqlDataReader reader = command.ExecuteReader();
 
-        int i = 0;
+        
 
        
 
         if (reader.HasRows)
         {
+            
             GwDoktor.DataSource = reader;
             GwDoktor.DataBind();
+
         }
         else
         {
@@ -61,18 +63,6 @@ public partial class Doktorsecim : System.Web.UI.Page
 
     }
     
-
-
-    public class Randevular
-    {
-        public string Randevutarih { get; set; }
-        public string Hastaneisim { get; set; }
-        public string Polisim { get; set; }
-        public string Doktor { get; set; }
-    }
-
-  
-
     
     protected void Button2_Click(object sender, EventArgs e)
     {
@@ -97,5 +87,29 @@ public partial class Doktorsecim : System.Web.UI.Page
         string doktorTC = Session["Tcno2"].ToString();
 
         Response.Redirect("Sorunbildir.aspx");
+    }
+
+    protected void GwDoktor_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+        GwDoktor.EditIndex = e.NewEditIndex;
+        Datareader();
+    }
+
+    protected void GwDoktor_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+        string doktortc = Session["Tcno2"].ToString();
+
+        string queryupdate = "UPDATE Randevu" +
+           " SET Randevutarih = @Randevutarih " +
+           " WHERE DoktorTC = @doktortc;";
+
+        SqlCommand command = new SqlCommand(queryupdate, SqlConnectionClass.connection);
+        SqlConnectionClass.CheckConnection();
+        command.Parameters.AddWithValue("@doktortc",doktortc);
+        command.Parameters.AddWithValue("@Randevutarih", (GwDoktor.Rows[e.RowIndex].FindControl("txtTarih") as TextBox).Text.Trim());
+        GwDoktor.EditIndex = -1;
+        command.ExecuteNonQuery();
+
+        Datareader();
     }
 }

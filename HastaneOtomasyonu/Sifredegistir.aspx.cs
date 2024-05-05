@@ -83,7 +83,8 @@ public partial class Sifredegistir : System.Web.UI.Page
                 }
                 catch (Exception ex)
                 {
-                    
+                    Response.Write("<script>alert('" + ex + "')</script>");
+
                 }
             }
         }
@@ -94,6 +95,7 @@ public partial class Sifredegistir : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
+        
         send_click();      
     }
 }

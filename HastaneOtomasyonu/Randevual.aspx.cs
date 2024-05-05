@@ -150,7 +150,7 @@ public partial class Randevual : System.Web.UI.Page
             }
         }catch(Exception ex)
         {
-            alert("YANLIŞLIK VAR");
+            alert("YANLIŞLIK VAR" + ex);
         }
         doktor.Items.Insert(0, new ListItem("Seçiniz", ""));
 

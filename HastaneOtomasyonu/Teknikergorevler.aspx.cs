@@ -33,7 +33,7 @@ public partial class Teknikergorevler : System.Web.UI.Page
         SqlConnectionClass.CheckConnection();
 
         DataTable dtbl1 = new DataTable();
-        int i = 0;
+       
 
         command.Fill(dtbl1);
 

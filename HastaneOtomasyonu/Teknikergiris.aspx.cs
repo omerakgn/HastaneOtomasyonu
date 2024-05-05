@@ -36,9 +36,9 @@ public partial class Teknikergiris : System.Web.UI.Page
         for (int i = 0; i < teknikerListesi.Count; i++)
         {
             Tekniker tekniker = teknikerListesi[i];
-            Session["Tcno"] = Tcno.Text;
+            Session["Teknikertcno"] = Tcno.Text;
             Session["Sifre"] = Sifre.Text;
-            String tcno = Session["Tcno"].ToString();
+            String tcno = Session["Teknikertcno"].ToString();
             String sifre = Session["Sifre"].ToString();
 
             if (tcno == tekniker.TeknikerTC && sifre == tekniker.Teknikersifre)
@@ -59,10 +59,10 @@ public partial class Teknikergiris : System.Web.UI.Page
     }
     private void button_click()
     {
-        Session["Tcno"] = Tcno.Text;
+        Session["Teknikertcno"] = Tcno.Text;
         Session["Sifre"] = Sifre.Text;
 
-        String tcno = Session["Tcno"].ToString();
+        String tcno = Session["Teknikertcno"].ToString();
         String sifre = Session["Sifre"].ToString() ;
         if(tcno == "" || sifre == "")
         {
@@ -81,6 +81,8 @@ public partial class Teknikergiris : System.Web.UI.Page
 
     protected void LinkButton2_Click(object sender, EventArgs e)
     {
+        string tcno = Session["Teknikertcno"].ToString();
+
         Response.Redirect("Sifredegistir.aspx");
     }
 }

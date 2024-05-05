@@ -8,12 +8,12 @@
 </head>
 <body>
     <form id="form1" runat="server">
-                   <div style ="margin-left:300px; margin-top:30px;">
+                   <div style ="margin-left:400px; margin-top:70px;">
    <asp:Gridview ID="Gwanket1" runat="server" AutoGenerateColumns="False" DataKeyNames="M_anketID" CssClass="auto-style1" Height="204px" Width="528px" >
        <Columns>
            <asp:TemplateField HeaderText="Randevu tarihi">
                <ItemTemplate>
-                   <asp:Label Text='<%#  Eval("Randevutarih") %>'  runat="server"> </asp:Label>
+                   <asp:Label Text='<%#  Eval("Randevutarih" , "{0:dd.MM.yyyy }") %>'  runat="server"> </asp:Label>
 
                </ItemTemplate>
            </asp:TemplateField>

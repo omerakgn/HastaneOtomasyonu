@@ -39,7 +39,7 @@ public partial class Teknikertalepler : System.Web.UI.Page
         SqlConnectionClass.CheckConnection();
 
         DataTable dtbl = new DataTable();
-        int i = 0;
+      
 
         command.Fill(dtbl);
 
@@ -81,7 +81,7 @@ public partial class Teknikertalepler : System.Web.UI.Page
             " SET DoktorTC = NULL ," +
             " Tekniksorun = NULL " +
             " WHERE TeknikSorunID = @ID;";
-        string sqlQuery = "DELETE FROM Teknik_Sorun WHERE TeknikSorunID = @ID";
+      
 
         
 

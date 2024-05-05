@@ -32,7 +32,7 @@ public partial class M_anketgor : System.Web.UI.Page
 
         command.Parameters.AddWithValue("@doktortc", doktortc);
         
-        int i = 0;
+        
 
         SqlDataReader reader = command.ExecuteReader();
 

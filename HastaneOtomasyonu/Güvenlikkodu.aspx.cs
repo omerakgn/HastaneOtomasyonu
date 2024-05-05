@@ -20,7 +20,8 @@ public partial class Güvenlikkodu : System.Web.UI.Page
         var kod2 = Session["Kod"].ToString();
         if(kod2==Num) 
         {
-           
+            
+
             Response.Redirect("Yenisifre.aspx");
         }
         else

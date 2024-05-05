@@ -14,7 +14,8 @@ public partial class Yenisifre : System.Web.UI.Page
     }
     public void sifreguncelleme()
     {
-        string sessionTC = "75395185245";//Session["tcnosifredegistir"].ToString();
+        string tcno = txtTC.Text;
+        
         
         
         string queryString = @"
@@ -52,7 +53,7 @@ public partial class Yenisifre : System.Web.UI.Page
 
         SqlCommand command = new SqlCommand(queryString, SqlConnectionClass.connection);
         SqlConnectionClass.CheckConnection();
-        command.Parameters.AddWithValue("@TC", sessionTC);
+        command.Parameters.AddWithValue("@TC", tcno);
 
         try
         {
@@ -86,14 +87,16 @@ public partial class Yenisifre : System.Web.UI.Page
    }
     public void Sifreguncelle(string tableName, string tcValue)
     {
-        // Yeni şifre
-        string newPassword = txtyenisifre.Text; // Bu kısmı kendi şifrenizle değiştirmeniz gerekecek
+        
+        string newPassword = txtyenisifre.Text;
 
-        // SQL sorgusu oluştur
+       
+
+
         string updateQuery = "";
 
-        // Tabloya göre güncelleme sorgusu oluştur
-        if (tableName == "Hasta")
+        
+        if (tableName=="Hasta")
         {
             updateQuery = "UPDATE Hasta SET Hastasifre = @NewPassword WHERE HastaTC = @tcValue";
         }
@@ -110,7 +113,7 @@ public partial class Yenisifre : System.Web.UI.Page
             updateQuery = "UPDATE Yonetici SET Yoneticisifre = @NewPassword WHERE YoneticiTC = @tcValue";
         }
 
-        // SqlConnection ve SqlCommand oluştur
+       
         
             SqlCommand updateCommand = new SqlCommand(updateQuery, SqlConnectionClass.connection);
             SqlConnectionClass.CheckConnection();
@@ -123,20 +126,21 @@ public partial class Yenisifre : System.Web.UI.Page
                 int rowsAffected = updateCommand.ExecuteNonQuery();
                 if (rowsAffected > 0)
                 {
-                    // Şifre güncellendi
+                    
                     Console.WriteLine("Şifre başarıyla güncellendi.");
                 }
                 else
                 {
-                    // Şifre güncellenemedi
+                    
                     Console.WriteLine("Şifre güncellenemedi.");
                 }
             }
             catch (Exception ex)
             {
-                // Hata işleme
-            }
+            Response.Write("<script>alert('" + ex  + "')</script>");
+
         }
+    }
     
 
     protected void Button1_Click(object sender, EventArgs e)
@@ -154,7 +158,13 @@ public partial class Yenisifre : System.Web.UI.Page
         else if (yenisifre == sifretekrar)
         {
             sifreguncelleme();
-            
+            txtTC.Text = "";
+            txtyenisifre.Text = "";
+            txtsifretekrar.Text = "";
+
+            Session["sifredegisikligi"] = "sifredegisikligi";
+           
+
         }
         else {
             Response.Write("<script>alert('" + "Şifreler birbirlerine eşit olmalı !" + "')</script>");

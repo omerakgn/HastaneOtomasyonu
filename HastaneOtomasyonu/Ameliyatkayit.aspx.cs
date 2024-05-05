@@ -34,7 +34,7 @@ public partial class Ameliyatkayit : System.Web.UI.Page
 
         SqlDataReader reader = command.ExecuteReader();
 
-        int i = 0;
+       
 
         
 

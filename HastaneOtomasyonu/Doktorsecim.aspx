@@ -34,13 +34,16 @@
         <div>
 
             <div style ="margin-left:300px; margin-top:30px;">
-    <asp:Gridview ID="GwDoktor" runat="server" AutoGenerateColumns="False" DataKeyNames="RandevuID" CssClass="auto-style1" Height="204px" Width="528px" >
+    <asp:Gridview ID="GwDoktor" runat="server" AutoGenerateColumns="False" DataKeyNames="RandevuID" OnRowEditing="GwDoktor_RowEditing" OnRowUpdating="GwDoktor_RowUpdating" CssClass="auto-style1" Height="204px" Width="528px" >
         <Columns>
             <asp:TemplateField HeaderText="Randevu tarihi">
                 <ItemTemplate>
-                    <asp:Label Text='<%#  Eval("Randevutarih") %>'  runat="server"> </asp:Label>
+                    <asp:Label Text='<%#  Eval("Randevutarih" , "{0:dd.MM.yyyy }") %>'  runat="server"  > </asp:Label>
 
                 </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="txtTarih" runat="server" Text='<%#  Eval("Randevutarih") %>' > </asp:TextBox>
+                </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Hasta isim">
                 <ItemTemplate>
@@ -57,9 +60,13 @@
 
              <asp:TemplateField HeaderText="">
                  <ItemTemplate>
-                     <asp:Button  Text="Randevuyu ertele " runat="server" CommandName="Delete" ToolTip="iptal" > </asp:Button>
+                     <asp:Button  Text="Randevuyu ertele " runat="server" CommandName="Edit" ToolTip="Edit" > </asp:Button>
 
                  </ItemTemplate>
+                 <EditItemTemplate>
+                     <asp:ImageButton runat="server" ImageUrl="~/Images/editimage.png"  CommandName="Update" Width="30px" Height="30px"/>
+
+                 </EditItemTemplate>
              </asp:TemplateField>
             
         </Columns>

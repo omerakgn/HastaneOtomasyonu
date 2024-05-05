@@ -9,7 +9,19 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-       
+      /*  try 
+        {
+            if (Session["sifredegisikligi"].ToString() == "sifredegisikligi") 
+            {
+                Response.Write("<script>alert('" + "Şifreniz başarıyla değiştirilmiştir !" + "')</script>");
+            }
+        }
+        catch(Exception ex)
+        {
+            
+        }*/
+
+
     }
 
     protected void Button3_Click(object sender, EventArgs e)

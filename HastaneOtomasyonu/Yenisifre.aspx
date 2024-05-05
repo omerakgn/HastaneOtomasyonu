@@ -23,6 +23,19 @@
     <table class="tablestyle">
         
         <tr>
+            <td class="tdstyle;">
+                <asp:Label ID="Label1" runat="server" Font-Bold="True" Text="TC kimlik numaranız :"></asp:Label>
+
+            </td>
+                    
+            <td class="tdstyle;"> 
+                <asp:TextBox ID="txtTC" runat="server" Width="160px"></asp:TextBox>
+
+            </td>
+
+                </tr>
+
+        <tr>
             <td class="tdstyle;"> 
                 <asp:Label ID="Label2" runat="server" Font-Bold="True" Text="Yeni Şifre :"></asp:Label>
             </td>
@@ -40,6 +53,7 @@
 
             </td>
 </tr>
+
     </table>
     
     <div>

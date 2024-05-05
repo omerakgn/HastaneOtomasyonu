@@ -44,7 +44,7 @@ public partial class Randevularim : System.Web.UI.Page
         command.Parameters.AddWithValue("@hastatc", hastatc);
 
         
-        int i = 0;
+
         SqlDataReader reader = command.ExecuteReader();
         
 

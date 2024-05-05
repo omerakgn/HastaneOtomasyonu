@@ -44,7 +44,7 @@
                             </td>
                             <td><p style="font-size:18px"><b>HASTA-DOKTOR <br/>
                                 RANDEVU TAKİP <br />
-                                SİSTEMİ<b> </p></td>
+                                SİSTEMİ</b> </p></td>
                         </tr>
                     </table>
                 

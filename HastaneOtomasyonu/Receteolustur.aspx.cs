@@ -24,7 +24,7 @@ public partial class Receteolustur : System.Web.UI.Page
         SqlCommand command = new SqlCommand(insertQuery, SqlConnectionClass.connection);
         SqlConnectionClass.CheckConnection();
 
-        string doktortc = "45678912301";   // Session["Tcno2"].ToString();
+        string doktortc =  Session["Tcno2"].ToString();
         string hastatc = Session["Hastatc"].ToString();
         string ilac = Session["hastailac"].ToString();
         string ilacadet = Session["ilacadet"].ToString();
@@ -94,7 +94,7 @@ public partial class Receteolustur : System.Web.UI.Page
 
     public void Datareader()
     {
-        string doktortc = "45678912301";// Session["Tcno2"].ToString();
+        string doktortc =  Session["Tcno2"].ToString();
 
 
         string sqlQuery = @"SELECT R.Ilac, R.Ilacadet, Ha.HastaTC, R.Kullanimtalimat ,Ha.Hasta, R.ReceteID
@@ -110,7 +110,7 @@ public partial class Receteolustur : System.Web.UI.Page
         command.Parameters.AddWithValue("@doktortc", doktortc);
 
 
-        int i = 0;
+        
         SqlDataReader reader = command.ExecuteReader();
 
 

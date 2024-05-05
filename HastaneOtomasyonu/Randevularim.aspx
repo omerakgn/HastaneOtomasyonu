@@ -30,7 +30,7 @@
                    <Columns>
                        <asp:TemplateField HeaderText="Randevu tarihi">
                            <ItemTemplate>
-                               <asp:Label Text='<%#  Eval("Randevutarih") %>'  runat="server"> </asp:Label>
+                               <asp:Label Text='<%#  Eval("Randevutarih" , "{0:dd.MM.yyyy }") %>'  runat="server"> </asp:Label>
 
                            </ItemTemplate>
                        </asp:TemplateField>

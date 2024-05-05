@@ -20,7 +20,7 @@
        <Columns>
            <asp:TemplateField HeaderText="Ameliyat tarihi">
                <ItemTemplate>
-                   <asp:Label ID="AmeliyatTarih1" Text='<%#  Eval("AmeliyatTarih") %>'  runat="server" > </asp:Label>
+                   <asp:Label ID="AmeliyatTarih1" Text='<%#  Eval("AmeliyatTarih" , "{0:dd.MM.yyyy }") %>'  runat="server" > </asp:Label>
                    
                </ItemTemplate>
                <FooterTemplate>
