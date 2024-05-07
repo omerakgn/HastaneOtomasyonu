@@ -48,7 +48,12 @@
             margin-left: 0px;
             margin-top: 11px;
             }
-        
+        input[type=number]::-webkit-inner-spin-button {
+   
+            -webkit-appearance: none;
+            display: none;
+
+        }
         
        
         
@@ -63,7 +68,7 @@
                         <asp:Label ID="Label1" runat="server" Text="Hasta adı :"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="TxtHasta" runat="server" CssClass="txtboxstyle" ></asp:TextBox>
+                        <asp:TextBox ID="TxtHasta" runat="server" CssClass="txtboxstyle" AutoCompleteType="Disabled" ></asp:TextBox>
                     </td>
                 </tr>
                 <tr class="trstyle">
@@ -71,7 +76,7 @@
                         <asp:Label ID="Label2" runat="server" Text="Hasta TC:"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="TxtHastatc" runat="server" CssClass="txtboxstyle"></asp:TextBox>
+                        <asp:TextBox ID="TxtHastatc" runat="server" CssClass="txtboxstyle" TextMode="Number" AutoCompleteType="Disabled"></asp:TextBox>
                     </td>
                 </tr>
                 <tr class="trstyle">
@@ -79,7 +84,7 @@
                         <asp:Label ID="Label3" runat="server" Text="Hasta mail :"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="TxtHastamail" runat="server" CssClass="txtboxstyle"></asp:TextBox>
+                        <asp:TextBox ID="TxtHastamail" runat="server" CssClass="txtboxstyle" AutoCompleteType="Disabled" TextMode="Email"></asp:TextBox>
                     </td>
                 </tr>
                 <tr class="trstyle">
@@ -87,7 +92,7 @@
                         <asp:Label ID="Label4" runat="server" Text="İlaç adı :"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="Txtilac" runat="server" CssClass="txtboxstyle"></asp:TextBox>
+                        <asp:TextBox ID="Txtilac" runat="server" CssClass="txtboxstyle" AutoCompleteType="Disabled"></asp:TextBox>
                     </td>
                 </tr>
                 <tr class="trstyle">
@@ -95,7 +100,7 @@
                         <asp:Label ID="Label5" runat="server" Text="Adet :"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="Txtadet" runat="server" CssClass="txtboxstyle"></asp:TextBox>
+                        <asp:TextBox ID="Txtadet" runat="server" CssClass="txtboxstyle" AutoCompleteType="Disabled"></asp:TextBox>
                     </td>
                 </tr>
                 <tr class="trstyle">
@@ -103,14 +108,22 @@
                         <asp:Label ID="Label6" runat="server" Text="Kullanım talimatları :"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="TxtTalimat" runat="server" CssClass="txtboxstyle" TextMode="MultiLine"></asp:TextBox>
+                        <asp:TextBox ID="TxtTalimat" runat="server" CssClass="txtboxstyle" TextMode="MultiLine" AutoCompleteType="Disabled"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td> <asp:Button ID="Kaydetbtn" Text="Kaydet" runat="server" CssClass="auto-style5"  Height="31px" OnClick="Kaydetbtn_Click" Width="86px" /></td>
                 </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                         <asp:RegularExpressionValidator Display="Dynamic" ControlToValidate="TxtHastatc" ID="MyPassordMinMaxLengthValidator" ValidationExpression="^[\s\S]{11,11}$" runat="server" ErrorMessage="Tc kimlik numaranız 11 haneli olmalıdır !" Font-Bold="True" ForeColor="Red"></asp:RegularExpressionValidator>
+                    </td>
+
+                </tr>
             </table>
+
              <div style="margin-top:70px;" class="auto-style6">
      <asp:GridView ID="GwRecete" runat="server" AutoGenerateColumns="False" DataKeyNames="ReceteID" CssClass="auto-style7" Height="243px" Width="529px">
          <Columns>

@@ -74,12 +74,12 @@ public partial class Randevual : System.Web.UI.Page
         }
 
     }
-    public void GetHastaneDropDownData(int secilendeger){ 
+    public void GetHastaneDropDownData(string secilendeger , string secilendeger2){ 
        
 
-        SqlCommand command = new SqlCommand("Select * from Hastane", SqlConnectionClass.connection);
+        SqlCommand command = new SqlCommand("Select * from Hastane WHERE Ilcekodu = @Ilcekodu ", SqlConnectionClass.connection);
         SqlConnectionClass.CheckConnection();
-        command.Parameters.AddWithValue("@IlceID", secilendeger);
+        command.Parameters.AddWithValue("@Ilcekodu", secilendeger);
 
         hastane.Items.Clear();
         SqlDataReader dr = command.ExecuteReader();
@@ -87,8 +87,8 @@ public partial class Randevual : System.Web.UI.Page
             ListItem item = new ListItem();
             item.Text = dr["Hastaneisim"].ToString();
             item.Value = dr["HastaneID"].ToString();
-            var baglıid = dr["IlceID"].ToString();
-            if (ilce.SelectedValue == baglıid)
+            var baglıid = dr["Ilcekodu"].ToString();
+            if (ilce.SelectedItem.Text == secilendeger2)
             {
                 Session["hastaneid"] = dr["HastaneID"].ToString(); ;
                 hastane.Items.Add(item);
@@ -165,7 +165,7 @@ public partial class Randevual : System.Web.UI.Page
         var Randevutarih =tarih.SelectedDate;
         string HastaTC = Session["Tcno"].ToString();
         string doktorTC = Session["Doktortc"].ToString();
-        string polid = Session["polid"].ToString();
+        string polid = Session["poliklinik"].ToString();
         string hasteneid = Session["hastaneid"].ToString();
 
         command.Parameters.AddWithValue("@Value1", Randevutarih);
@@ -242,11 +242,27 @@ public partial class Randevual : System.Web.UI.Page
 
     protected void ilce_SelectedIndexChanged(object sender, EventArgs e) 
     {
-        int secilendeger;
-        if (int.TryParse(ilce.SelectedValue, out secilendeger))
+        string secilendeger;
+
+        secilendeger = ilce.SelectedItem.Text;
+
+        
+        
+
+        SqlCommand commandListIlce = new SqlCommand("SELECT Ilcekodu, ILID FROM Ilce WHERE Ilceisim = @Ilceisim", SqlConnectionClass.connection);
+        SqlConnectionClass.CheckConnection();
+        commandListIlce.Parameters.AddWithValue("@Ilceisim", secilendeger);
+        
+        SqlDataReader dr2 = commandListIlce.ExecuteReader();
+        if (dr2.Read())
         {
-            GetHastaneDropDownData(secilendeger);
+            string ilceKodu = dr2["Ilcekodu"].ToString();
+            
+            GetHastaneDropDownData(ilceKodu,secilendeger);
         }
+
+       
+        
     }
 
     protected void hastane_SelectedIndexChanged(object sender, EventArgs e) 

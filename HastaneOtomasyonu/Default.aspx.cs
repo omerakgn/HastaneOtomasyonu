@@ -42,4 +42,9 @@ public partial class _Default : System.Web.UI.Page
     {
         Response.Redirect("Teknikergiris.aspx"); 
     }
+
+    protected void Button5_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Yoneticigiris.aspx");
+    }
 }

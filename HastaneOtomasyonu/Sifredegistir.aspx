@@ -16,16 +16,22 @@
      .tdstyle{
          height:23px;
      }
-          .auto-style1 {
-              margin-left: 412px;
-              margin-top: 25px;
-          }
+     .auto-style1 {
+         margin-left: 412px;
+         margin-top: 25px;
+     }
+     input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+         display: none;
+     }
  </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
-            <div style="background-color: lightblue; font-size:50px; height:66px;width: 900px; margin-left:200px;" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>ŞİFREMİ UNUTTUM</b></div>
+            <div style="background-color: lightblue; font-size:50px; height:66px;width: 100%; " > 
+                <asp:Label Text="Şifremi Unuttum" runat="server" style="margin-left:500px;"></asp:Label>
+            </div>
         <div style="margin-top:50px; margin-left:200px;" >
             
             <table class="tablestyle">
@@ -34,7 +40,7 @@
                         <asp:Label ID="Label1" runat="server" Font-Bold="True" Text="T.C :"></asp:Label>
                     </td>
                     <td class="tdstyle;"> 
-                        <asp:TextBox ID="tcno" runat="server" Width="160px"></asp:TextBox>
+                        <asp:TextBox ID="tcno" runat="server" Width="160px" TextMode="Number" AutoCompleteType="Disabled"></asp:TextBox>
                          
                     </td>
                 </tr>
@@ -44,7 +50,7 @@
                         <asp:Label ID="Label2" runat="server" Font-Bold="True" Text="Mail Adresiniz :"></asp:Label>
                     </td>
                     <td class="tdstyle;"> 
-                        <asp:TextBox ID="mail" runat="server" Width="160px"  TextMode="Email"></asp:TextBox>
+                        <asp:TextBox ID="mail" runat="server" Width="160px"  TextMode="Email" AutoCompleteType="Disabled"></asp:TextBox>
                     </td>
                 </tr>
             </table>

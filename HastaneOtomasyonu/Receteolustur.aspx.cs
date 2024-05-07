@@ -60,6 +60,7 @@ public partial class Receteolustur : System.Web.UI.Page
     private void button_click()
     {
 
+
         Session["Hasta"] = TxtHasta.Text;
         Session["Hastatc"] = TxtHastatc.Text;
         Session["hastamail"] = TxtHastamail.Text;
@@ -74,14 +75,28 @@ public partial class Receteolustur : System.Web.UI.Page
         String ilac = Session["hastailac"].ToString();
         String ilacadet = Session["ilacadet"].ToString();
         String kullanimtalimat = Session["kullanimtalimat"].ToString();
+
+        string query = "SELECT COUNT(*) FROM Hasta WHERE HastaTC = @TC AND Hasta = @Ad";
+        SqlCommand command = new SqlCommand(query, SqlConnectionClass.connection);
+        SqlConnectionClass.CheckConnection();
+        command.Parameters.AddWithValue("@TC", hastatc);
+        command.Parameters.AddWithValue("@Ad", hasta);
+
+        int count = (int)command.ExecuteScalar();
+
+
         if (hasta == "" || hastatc == "" || hastamail == "" || ilac == "" || ilacadet == "" || kullanimtalimat == "" )
         {
             Response.Write("<script>alert('" + "Lütfen istenilen bilgileri doldurunuz." + "')</script>");
         }
-        else
+        else if (count>0)
         {
             Datainsert();
-           
+        }
+        else
+        {
+
+            Response.Write("<script>alert('" + "Lütfen hasta bilgilerini doğru giriniz." + "')</script>");
         }
 
     }

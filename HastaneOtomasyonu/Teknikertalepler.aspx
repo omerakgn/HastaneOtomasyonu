@@ -5,15 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        function confirmDelete(button) {
-    if (confirm("Bu kaydı silmek istediğinize emin misiniz?")) {
-        __doPostBack(button.id, ""); 
-        return true;
-    } else {
-        return false;
-    }
-}</script>
+    
     <title></title>
     <style type="text/css">
         .auto-style1 {
@@ -60,7 +52,7 @@
                   
                   <asp:TemplateField HeaderText="Reddet">
                       <ItemTemplate>
-                          <asp:Button Text="Reddet"  runat="server" CommandName="Delete" ToolTip="delete"> </asp:Button>
+                          <asp:Button Text="Reddet"  runat="server" CommandName="Delete" ToolTip="Reddet"> </asp:Button>
 
                       </ItemTemplate>
 

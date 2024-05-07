@@ -15,8 +15,8 @@
             margin-left:300px;
         }
         .auto-style11 {
-            height:40px;
-        
+            height: 40px;
+        }
         .dropdownlistdesign{
             height: 60%;
             width: 190px;
@@ -28,7 +28,9 @@
     <form id="form1" runat="server">
         
         <div>
-            <div style="background-color: lightblue; font-size:50px; height:66px;width: 900px; margin-left:200px" > <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RANDEVU AL</b></div>
+            <div style="background-color: lightblue; font-size:50px; height:66px;width: 100%; " > 
+                <asp:Label Text="Randevu Al" runat="server" style="margin-left:550px;"></asp:Label>
+            </div>
         
             <div style="height:800px; margin-left:200px;width: 900px; margin-top:20px;">
            

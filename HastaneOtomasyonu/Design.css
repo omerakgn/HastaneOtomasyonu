@@ -27,25 +27,31 @@
 }
 .circleclass {
     background-color: lightblue;
-    border-radius: 50%;
-    border: 10px solid rgba(255, 255, 255, .5);
-    width: 125px;
-    height: 125px;
-    line-height: 125px;
+    border-radius: 30%;
+    border: 8px solid rgba(255, 255, 255, .5);
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
     font-size: 12px;
     font-weight: bold;
     color: black;
     margin-bottom: 4px;
     text-align: center;
     align-items: center;
+    margin-left:15px;
 }
-.button{
+.button {
     background-color: lightblue;
-    border-radius:2%;
-    border:solid black 2px;
-    height:30px;
-
+    border-radius: 2%;
+    border: 1px solid black;
+    height: 30px;
+    
 }
+    .button:hover {
+        background-color: aliceblue;
+        color: lightblue;
+        cursor: pointer
+    }
 .lineup {
     
     float: left;

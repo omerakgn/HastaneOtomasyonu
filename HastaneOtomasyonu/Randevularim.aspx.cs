@@ -88,12 +88,23 @@ public partial class Randevularim : System.Web.UI.Page
             " PolID = NULL ,"+
             " HastaneID = NULL "+
             " WHERE RandevuID = @ID;";
+
         
+
+       
+
+        Datareader();
         SqlCommand command = new SqlCommand(queryupdate, SqlConnectionClass.connection);
         SqlConnectionClass.CheckConnection();
         command.Parameters.AddWithValue("@ID", Convert.ToInt32(GwRandevu.DataKeys[e.RowIndex].Value.ToString()));
         command.ExecuteNonQuery();
 
         Datareader();
+    }
+
+    protected void btnanket_Click(object sender, EventArgs e)
+    {
+        string hastaTC = Session["Tcno"].ToString();
+        Response.Redirect("Memnuniyetanketi.aspx");
     }
 }
