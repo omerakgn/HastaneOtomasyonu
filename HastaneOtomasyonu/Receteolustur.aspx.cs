@@ -136,15 +136,7 @@ public partial class Receteolustur : System.Web.UI.Page
         }
         else
         {
-            DataTable dtbl = new DataTable();
-            dtbl.Rows.Add(dtbl.NewRow());
-            GwRecete.DataSource = dtbl;
-            GwRecete.DataBind();
-            GwRecete.Rows[0].Cells.Clear();
-            GwRecete.Rows[0].Cells.Add(new TableCell());
-            GwRecete.Rows[0].Cells[0].ColumnSpan = dtbl.Columns.Count;
-            GwRecete.Rows[0].Cells[0].Text = "Veri bulunamadı";
-            GwRecete.Rows[0].Cells[0].HorizontalAlign = HorizontalAlign.Center;
+           
         }
 
     }

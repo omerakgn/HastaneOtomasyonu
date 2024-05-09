@@ -4,6 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link href="Design.css" rel="stylesheet" />
     <title></title>
     <style type="text/css">
 
@@ -15,6 +16,10 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <div style ="margin-left: 600px;margin-top:50px;">
+            <asp:Button ID="kayitbtn" Text="Yeni Kayıt Oluştur" runat="server"  CssClass="button" Width="150px" OnClick="kayitbtn_Click" />
+        </div>
+
                   <div style ="margin-left:200px; margin-top:90px;">
    <asp:Gridview ID="GwAmeliyat" runat="server" AutoGenerateColumns="False" DataKeyNames="AmeliyatID" OnRowCommand="GwAmeliyat_RowCommand" ShowFooter="true"  Height="204px" Width="528px" >
        <Columns>

@@ -41,21 +41,13 @@ public partial class Ameliyatkayit : System.Web.UI.Page
 
         if (reader.HasRows)
         {
-            
+            kayitbtn.Visible = false;
             GwAmeliyat.DataSource = reader;
             GwAmeliyat.DataBind();
         }
         else
         {
-            DataTable dtbl = new DataTable();
-            dtbl.Rows.Add(dtbl.NewRow());
-            GwAmeliyat.DataSource = dtbl;
-            GwAmeliyat.DataBind();
-            GwAmeliyat.Rows[0].Cells.Clear();
-            GwAmeliyat.Rows[0].Cells.Add(new TableCell());
-            GwAmeliyat.Rows[0].Cells[0].ColumnSpan = dtbl.Columns.Count;
-            GwAmeliyat.Rows[0].Cells[0].Text = "Veri bulunamadı";
-            GwAmeliyat.Rows[0].Cells[0].HorizontalAlign = HorizontalAlign.Center;
+            kayitbtn.Visible = true;
         }
 
     }
@@ -70,6 +62,10 @@ public partial class Ameliyatkayit : System.Web.UI.Page
             string sqlquery = "INSERT INTO Ameliyat (AmeliyatTarih, Ameliyathaneno,Ameliyataciklama,DoktorTC,HastaTC) VALUES(@AmeliyatTarih, @Ameliyathaneno , @Ameliyataciklama, @DoktorTC,@HastaTC)";
             SqlCommand command = new SqlCommand(sqlquery, SqlConnectionClass.connection);
             SqlConnectionClass.CheckConnection();
+
+           
+            
+
             command.Parameters.AddWithValue("@AmeliyatTarih", (GwAmeliyat.FooterRow.FindControl("AmeliyatTarihtxt") as TextBox).Text.Trim());
             command.Parameters.AddWithValue("@Ameliyathaneno", (GwAmeliyat.FooterRow.FindControl("Ameliyathaneno") as TextBox).Text.Trim());
             command.Parameters.AddWithValue("@Ameliyataciklama", (GwAmeliyat.FooterRow.FindControl("Ameliyataciklamatxt") as TextBox).Text.Trim());
@@ -80,5 +76,11 @@ public partial class Ameliyatkayit : System.Web.UI.Page
 
             Datareader();
         }
+    }
+
+    protected void kayitbtn_Click(object sender, EventArgs e)
+    {
+
+        Response.Redirect("Ameliyatkayitolustur.aspx");
     }
 }

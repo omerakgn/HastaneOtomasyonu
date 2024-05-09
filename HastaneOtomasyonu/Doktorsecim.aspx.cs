@@ -50,15 +50,7 @@ public partial class Doktorsecim : System.Web.UI.Page
         }
         else
         {
-            DataTable dtbl = new DataTable();
-            dtbl.Rows.Add(dtbl.NewRow());
-            GwDoktor.DataSource = dtbl;
-            GwDoktor.DataBind();
-            GwDoktor.Rows[0].Cells.Clear();
-            GwDoktor.Rows[0].Cells.Add(new TableCell());
-            GwDoktor.Rows[0].Cells[0].ColumnSpan = dtbl.Columns.Count;
-            GwDoktor.Rows[0].Cells[0].Text = "Veri bulunamadı";
-            GwDoktor.Rows[0].Cells[0].HorizontalAlign = HorizontalAlign.Center;
+            lblMessage.Text = " <b>HERHANGİ BİR RANDEVUNUZ BULUNMAMAKTADIR. </b>";
         }
 
     }
@@ -101,12 +93,13 @@ public partial class Doktorsecim : System.Web.UI.Page
 
         string queryupdate = "UPDATE Randevu" +
            " SET Randevutarih = @Randevutarih " +
-           " WHERE DoktorTC = @doktortc;";
+           " WHERE DoktorTC = @doktortc AND RandevuID = @RandevuID";
 
         SqlCommand command = new SqlCommand(queryupdate, SqlConnectionClass.connection);
         SqlConnectionClass.CheckConnection();
         command.Parameters.AddWithValue("@doktortc",doktortc);
         command.Parameters.AddWithValue("@Randevutarih", (GwDoktor.Rows[e.RowIndex].FindControl("txtTarih") as TextBox).Text.Trim());
+        command.Parameters.AddWithValue("@RandevuID", GwDoktor.DataKeys[e.RowIndex].Value);
         GwDoktor.EditIndex = -1;
         command.ExecuteNonQuery();
 

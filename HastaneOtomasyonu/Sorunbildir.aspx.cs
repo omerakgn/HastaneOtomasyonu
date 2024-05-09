@@ -31,6 +31,7 @@ public partial class Sorunbildir : System.Web.UI.Page
             command.Parameters.AddWithValue("@Tekniksorun", teknikSorun);
             command.ExecuteNonQuery();
             Tekniksoruntxt.Text = "";
+            Response.Write("<script>alert('" + "Teknik sorun ilgili kişilere gönderilmiştir. " + "')</script>");
         }
         else
         {

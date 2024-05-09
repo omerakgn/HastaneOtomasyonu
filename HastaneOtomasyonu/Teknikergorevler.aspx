@@ -4,14 +4,18 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link href="Design.css" rel="stylesheet" />
     <title></title>
     <style type="text/css">
     .auto-style1 {
-        margin-left: 396px;
+        margin-left: 350px;
     }
     .ddlstyle{
-        width:100%;
-        height:70%;
+        width:120px;
+        height:30px;
+    }
+    .TFstyle{
+        width:120px;
     }
 </style>
 </head>
@@ -19,18 +23,18 @@
     <form id="form1" runat="server">
                
         <div style="margin-top:100px;" class="auto-style1">
-          <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False"  DataKeyNames="TeknikergorevID"  Height="221px" Width="465px"  OnRowCommand="GridView2_RowCommand">
-              <Columns>
-                  <asp:TemplateField HeaderText="Doktor">
+          <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False"  DataKeyNames="TeknikergorevID"  Height="221px" Width="700px"  OnRowCommand="GridView2_RowCommand" >
+              <Columns >
+                  <asp:TemplateField HeaderText="Doktor" >
                       <ItemTemplate>
-                          <asp:Label ID="labeldoktor" Text='<%#  Eval("Doktor") %>' runat="server"> </asp:Label>
+                          <asp:Label ID="labeldoktor" Text='<%#  Eval("Doktor") %>' runat="server" > </asp:Label>
                       </ItemTemplate>
 
 
                   </asp:TemplateField>
-                  <asp:TemplateField HeaderText="Poliklinik">
+                  <asp:TemplateField HeaderText="Poliklinik" >
                       <ItemTemplate>
-                          <asp:Label Text='<%#  Eval("Polisim") %>' runat="server"> </asp:Label>
+                          <asp:Label Text='<%#  Eval("Polisim") %>' runat="server" > </asp:Label>
 
                       </ItemTemplate>
 
@@ -44,7 +48,15 @@
                       </ItemTemplate>
 
                   </asp:TemplateField>
-                  <asp:TemplateField HeaderText="Teknik Durum" >
+
+                  <asp:TemplateField  HeaderText="Teknik Durum">
+                      <ItemTemplate>
+                          <asp:Label ID="Labelteknikdurum" Text='<%#  Eval("Teknikdurum") %>' runat="server" ></asp:Label>
+                      </ItemTemplate>
+
+                  </asp:TemplateField>
+
+                  <asp:TemplateField HeaderText="Teknik Durum Güncelle " >
                       <ItemTemplate>
                           <asp:DropDownList CssClass="ddlstyle" ID="DDLTeknikdurum"  runat="server"  AutoPostBack="True" OnSelectedIndexChanged="DDLTeknikdurum_SelectedIndexChanged"> 
                               <asp:ListItem Value="">Seçiniz </asp:ListItem>
@@ -61,13 +73,22 @@
 
                   </asp:TemplateField>
                   
+                  <asp:TemplateField>
+                      <ItemTemplate>
+                           <asp:Button CssClass="button" Width="100px" Text="Durum güncelle"  runat="server" CommandName="Save" ToolTip="Güncelle"> </asp:Button>
+                      </ItemTemplate>
+
+                  </asp:TemplateField>
+
+
                   <asp:TemplateField HeaderText="">
                       <ItemTemplate>
-                          <asp:Button CssClass="ddlstyle" Text="Tamamlandı"  runat="server" CommandName="Buton" ToolTip="delete"> </asp:Button>
+                          <asp:Button CssClass="button" Text="Tamamlandı"  runat="server" CommandName="Buton" ToolTip="delete"> </asp:Button>
 
                       </ItemTemplate>
 
                   </asp:TemplateField>
+                  
               </Columns>
                
 

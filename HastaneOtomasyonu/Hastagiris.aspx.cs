@@ -12,10 +12,7 @@ public partial class Hastagiris : System.Web.UI.Page
     {
         
     }
-    public void alert(string message)
-    {
-        Response.Write("<script>alert('" + message + "')</script>");
-    }
+   
     public void Datacontrol()
     {
         SqlCommand commandListIl = new SqlCommand("Select * from Hasta", SqlConnectionClass.connection);
@@ -53,9 +50,9 @@ public partial class Hastagiris : System.Web.UI.Page
             }
             else
             {
-               
+                Response.Write("<script>alert('" + "Lütfen bilgilerinizi kontrol ediniz." + "')</script>");
 
-                alert("Lütfen bilgilerinizi kontrol ediniz.");
+                
             }
         }
     }
@@ -73,7 +70,8 @@ public partial class Hastagiris : System.Web.UI.Page
         String sifre = Session["Sifre"].ToString();
         if (tcno == "" || sifre == "")
         {
-            alert("Lütfen istenilen bilgileri doldurunuz.");
+            Response.Write("<script>alert('" + "Lütfen istenilen bilgileri doldurunuz." + "')</script>");
+           
         }
 
         else

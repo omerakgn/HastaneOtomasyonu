@@ -19,7 +19,7 @@ public partial class Teknikergorevler : System.Web.UI.Page
 
     public void Datareader()
     {
-        string sqlQuery = @"SELECT D.Doktor, P.Polisim, T.Tekniksorun, T.TeknikergorevID 
+        string sqlQuery = @"SELECT D.Doktor, P.Polisim, T.Tekniksorun, T.TeknikergorevID ,T.Teknikdurum
                         FROM Teknikergorevler AS T
                         INNER JOIN Teknik_Sorun AS TS ON T.TeknikSorunID = TS.TeknikSorunID 
                         INNER JOIN Doktor AS D ON T.DoktorTC = D.DoktorTC
@@ -71,6 +71,12 @@ public partial class Teknikergorevler : System.Web.UI.Page
 
          ViewState["SelectedDropDownID"] = ddlID;
          ViewState["SelectedDropDownValue"] = selectedValue;
+
+        string sqlquery = "  ";
+        SqlCommand command = new SqlCommand(sqlquery, SqlConnectionClass.connection);
+        SqlConnectionClass.CheckConnection();
+        command.Parameters.AddWithValue("@TeknikergorevID", selectedValue);
+
     }
    
 
@@ -107,7 +113,36 @@ public partial class Teknikergorevler : System.Web.UI.Page
                 Datareader();
             }
         }
-        
+        if (e.CommandName.Equals("Save"))
+        {
+            int rowIndex = ((GridViewRow)((Control)e.CommandSource).NamingContainer).RowIndex;
+            Label lblTeknikSorun = GridView2.Rows[rowIndex].FindControl("LabelTeknikSorun") as Label;
+            string teknikSorun = lblTeknikSorun.Text;
+            int teknikSorunID = GetTeknikSorunIDFromDatabase(teknikSorun);
+
+
+            string selectedDropDownID = (string)ViewState["SelectedDropDownID"];
+            string teknikdurum = (string)ViewState["SelectedDropDownValue"];
+            int teknikergorevID = GetTeknikergorevIDFromDatabase(teknikSorun);
+
+            if (teknikergorevID != -1)
+            {
+                string queryupdate = "UPDATE Teknikergorevler" +
+                        " SET Teknikdurum = @teknikdurum " +
+                        " WHERE TeknikergorevID = @TeknikergorevID;";
+
+                SqlCommand command = new SqlCommand(queryupdate, SqlConnectionClass.connection);
+                SqlConnectionClass.CheckConnection();
+                command.Parameters.AddWithValue("@TeknikergorevID", teknikergorevID);
+                command.Parameters.AddWithValue("@teknikdurum", teknikdurum);
+                
+                command.ExecuteNonQuery();
+               
+
+                Datareader();
+            }
+
+        }
 
 
     }
@@ -196,4 +231,6 @@ public partial class Teknikergorevler : System.Web.UI.Page
     {
         Response.Redirect("Bitengorevler.aspx");
     }
+
+   
 }

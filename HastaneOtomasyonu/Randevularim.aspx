@@ -73,7 +73,9 @@
                    </Columns>
 
                </asp:Gridview>
-
+               <div style="margin-left:110px;">
+                        <asp:Label ID="lblMessage" runat="server"></asp:Label>
+                    </div>
             </div>
                     
         </div>

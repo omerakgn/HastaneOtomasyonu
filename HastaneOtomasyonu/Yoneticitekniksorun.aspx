@@ -13,34 +13,41 @@
 </style>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div class="style">
-            <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False"  DataKeyNames="TeknikSorunID"  Height="221px" Width="465px"  >
-                <Columns>
-    <asp:TemplateField HeaderText="Doktor">
-        <ItemTemplate>
-            <asp:Label ID="labeldoktor" Text='<%#  Eval("Doktor") %>' runat="server"> </asp:Label>
-        </ItemTemplate>
+        <form id="form1" runat="server">
+            <div class="style">
+                <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False"  DataKeyNames="TeknikergorevID"  Height="221px" Width="465px"  >
+                    <Columns>
+        <asp:TemplateField HeaderText="Doktor">
+            <ItemTemplate>
+                <asp:Label ID="labeldoktor" Text='<%#  Eval("Doktor") %>' runat="server"> </asp:Label>
+            </ItemTemplate>
 
 
-    </asp:TemplateField>
-    <asp:TemplateField HeaderText="Poliklinik">
-        <ItemTemplate>
-            <asp:Label Text='<%#  Eval("Polisim") %>' runat="server"> </asp:Label>
+        </asp:TemplateField>
+        <asp:TemplateField HeaderText="Poliklinik">
+            <ItemTemplate>
+                <asp:Label Text='<%#  Eval("Polisim") %>' runat="server"> </asp:Label>
 
-        </ItemTemplate>
+            </ItemTemplate>
 
-    </asp:TemplateField>
+        </asp:TemplateField>
     
     
-    <asp:TemplateField HeaderText="Teknik Sorun">
-        <ItemTemplate>
-            <asp:Label  ID="Labeltekniksorun" Text='<%#  Eval("Tekniksorun") %>' runat="server"> </asp:Label>
+        <asp:TemplateField HeaderText="Teknik Sorun">
+            <ItemTemplate>
+                <asp:Label  ID="Labeltekniksorun" Text='<%#  Eval("Tekniksorun") %>' runat="server"> </asp:Label>
 
-        </ItemTemplate>
+            </ItemTemplate>
 
-    </asp:TemplateField>
-   
+        </asp:TemplateField>
+                        
+        <asp:TemplateField HeaderText="Teknik Durum">
+            <ItemTemplate>
+                <asp:Label ID="lblTeknikdurum" Text='<%#  Eval("Teknikdurum") %>' runat="server" ></asp:Label>
+
+            </ItemTemplate>
+
+        </asp:TemplateField>
     
 </Columns>
 

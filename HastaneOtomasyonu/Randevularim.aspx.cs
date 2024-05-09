@@ -44,27 +44,22 @@ public partial class Randevularim : System.Web.UI.Page
         command.Parameters.AddWithValue("@hastatc", hastatc);
 
         
-
-        SqlDataReader reader = command.ExecuteReader();
+        using (SqlDataReader reader = command.ExecuteReader())
+        {
+            if (reader.HasRows)
+            {
+                GwRandevu.DataSource = reader;
+                GwRandevu.DataBind();
+            }
+            else
+            {
+                lblMessage.Text = "<b>HERHANGİ BİR RANDEVUNUZ BULUNMAMAKTADIR. RANDEVU ALMAK İÇİN \"YENİ RANDEVU AL \" BUTONUNA TIKLAYINIZ.</b>";
+            }
+        }
+       
         
 
-        if (reader.HasRows)
-        {
-            GwRandevu.DataSource = reader;
-            GwRandevu.DataBind();
-        }
-        else
-        {
-            DataTable dtbl = new DataTable();
-            dtbl.Rows.Add(dtbl.NewRow());
-            GwRandevu.DataSource = dtbl;
-            GwRandevu.DataBind();
-            GwRandevu.Rows[0].Cells.Clear();
-            GwRandevu.Rows[0].Cells.Add(new TableCell());
-            GwRandevu.Rows[0].Cells[0].ColumnSpan = dtbl.Columns.Count;
-            GwRandevu.Rows[0].Cells[0].Text = "Veri bulunamadı";
-            GwRandevu.Rows[0].Cells[0].HorizontalAlign = HorizontalAlign.Center;
-        }
+        
 
     }
     
@@ -93,7 +88,7 @@ public partial class Randevularim : System.Web.UI.Page
 
        
 
-        Datareader();
+       
         SqlCommand command = new SqlCommand(queryupdate, SqlConnectionClass.connection);
         SqlConnectionClass.CheckConnection();
         command.Parameters.AddWithValue("@ID", Convert.ToInt32(GwRandevu.DataKeys[e.RowIndex].Value.ToString()));

@@ -43,13 +43,7 @@ public partial class Yenisifre : System.Web.UI.Page
             FROM Yonetici
             WHERE YoneticiTC = @SessionTC;";
         
-                   /*"SELECT HastaTC, 'Hasta' AS TableName FROM Hasta WHERE HastaTC = @TC " +
-                     "UNION ALL " +
-                     "SELECT DoktorTC, 'Doktor' AS TableName FROM Doktor WHERE DoktorTC = @TC " +
-                     "UNION ALL " +
-                     "SELECT TeknikerTC, 'Tekniker' AS TableName FROM Tekniker WHERE TeknikerTC = @TC " +
-                     "UNION ALL " +
-                     "SELECT YoneticiTC, 'Yonetici' AS TableName FROM Yonetici WHERE YoneticiTC = @TC ";*/
+                 
 
         SqlCommand command = new SqlCommand(queryString, SqlConnectionClass.connection);
         SqlConnectionClass.CheckConnection();
@@ -163,7 +157,7 @@ public partial class Yenisifre : System.Web.UI.Page
             txtsifretekrar.Text = "";
 
             Session["sifredegisikligi"] = "sifredegisikligi";
-           
+            Response.Redirect("Default.aspx");
 
         }
         else {

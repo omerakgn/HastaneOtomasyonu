@@ -16,7 +16,7 @@
 
                     </td>
                     <td style="height:20px;"> 
-                        <asp:TextBox ID="Kod" runat="server" Width="160px" Height="100%"></asp:TextBox>
+                        <asp:TextBox ID="Kod" runat="server" Width="160px" Height="100%" AutoCompleteType="Disabled"></asp:TextBox>
 
                     </td>
 

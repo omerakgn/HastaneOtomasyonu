@@ -44,15 +44,7 @@ public partial class M_anketgor : System.Web.UI.Page
         }
         else
         {
-            DataTable dtbl = new DataTable();
-            dtbl.Rows.Add(dtbl.NewRow());
-            Gwanket1.DataSource = dtbl;
-            Gwanket1.DataBind();
-            Gwanket1.Rows[0].Cells.Clear();
-            Gwanket1.Rows[0].Cells.Add(new TableCell());
-            Gwanket1.Rows[0].Cells[0].ColumnSpan = dtbl.Columns.Count;
-            Gwanket1.Rows[0].Cells[0].Text = "Veri bulunamadı";
-            Gwanket1.Rows[0].Cells[0].HorizontalAlign = HorizontalAlign.Center;
+            lblMessage.Text = " <b>HERHANGİ BİR ANKET SONUCU BULUNMAMAKTADIR. </b>";
         }
 
     }
